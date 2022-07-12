@@ -16,6 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/profile', [\App\Http\Controllers\ProfileController::class, 'getLoggedUserProfile']);
     Route::put('/profile/edit', [\App\Http\Controllers\ProfileController::class, 'updateProfile']);
-
+    Route::get('/locations', [\App\Http\Controllers\LocationController::class, 'getLoggedUserLocations']);
 });
 require __DIR__.'/auth.php';
