@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('location_id');
             $table->foreignId('product_id');
+            $table->dateTime('date');
             $table->timestamps();
         });
     }
