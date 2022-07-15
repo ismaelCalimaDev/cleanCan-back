@@ -17,7 +17,7 @@ use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
-
+    protected static ?string $navigationGroup = 'Administración';
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
     protected static ?string $label = 'Usuario';
     protected static ?string $pluralLabel = 'Usuarios';

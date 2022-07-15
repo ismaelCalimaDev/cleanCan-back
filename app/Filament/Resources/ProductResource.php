@@ -17,7 +17,7 @@ use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
-
+    protected static ?string $navigationGroup = 'Aplicación';
     protected static ?string $navigationIcon = 'heroicon-o-sparkles';
     protected static ?string $label = 'Lavado';
     protected static ?string $pluralLabel = 'Lavados';
