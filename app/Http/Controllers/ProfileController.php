@@ -16,7 +16,7 @@ class ProfileController extends Controller
     {
         return response()->json([
             'status' => true,
-            'profile' => auth()->user(),
+            'user' => auth()->user(),
         ]);
     }
     public function updateProfile(Request $request)
@@ -35,7 +35,7 @@ class ProfileController extends Controller
 
         return response()->json([
             'status' => true,
-            'profile' => auth()->user(),
+            'user' => auth()->user(),
         ]);
     }
 }
