@@ -52,7 +52,7 @@ class CarsController extends Controller
 
         return response()->json([
             'status' => true,
-            'cars' => auth()->user()->cars()->get(),
+            'cars' => Car::where('id', $id)->get(),
         ]);
     }
     public function deleteCar($id) {
