@@ -51,7 +51,7 @@ class LocationController extends Controller
 
         return response()->json([
             'status' => true,
-            'locations' => auth()->user()->locations()->get(),
+            'locations' => Location::where('id', $id)->get(),
         ]);
     }
     public function deleteLocation($id) {
