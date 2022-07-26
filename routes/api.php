@@ -32,6 +32,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/products', [\App\Http\Controllers\ProductController::class, 'getProducts']);
     Route::get('/product/{id}', [\App\Http\Controllers\ProductController::class, 'getProductById']);
 
+    Route::get('/my-orders', [\App\Http\Controllers\OrderController::class, 'getMyOrders']);
+
 });
 Route::get('/common-questions', [\App\Http\Controllers\QuestionsController::class, 'getCommonQuestions']);
 require __DIR__.'/auth.php';
