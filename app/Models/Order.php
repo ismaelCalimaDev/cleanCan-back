@@ -21,6 +21,12 @@ class Order extends Model
         'location_detail',
         'car_detail',
     ];
+    protected $hidden = [
+      'user_id',
+      'location_id',
+      'product_id',
+        'car_id',
+    ];
 
     public function productDetail(): Attribute {
         return Attribute::make(
