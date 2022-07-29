@@ -26,6 +26,9 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\DateTimePicker::make('date')
+                    ->label('Hora del lavado')
+                    ->columnSpan(2),
                 Forms\Components\BelongsToSelect::make('user_id')
                     ->relationship('user', 'email')
                     ->label('Correo del usuario')
