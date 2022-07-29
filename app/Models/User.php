@@ -7,11 +7,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Cashier\Billable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements FilamentUser
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -53,5 +54,17 @@ class User extends Authenticatable implements FilamentUser
     public function canAccessFilament(): bool
     {
         return $this->email === 'cleancan@admin.com';
+    }
+
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            $stripeCustomer = $user->createAsStripeCustomer();
+        });
+        static::updated(function ($user) {
+            if ($user->hasStripeId()) {
+                $user->syncStripeCustomerDetails();
+            }
+        });
     }
 }
