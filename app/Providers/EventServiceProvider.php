@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Listeners\SetUpIntentFailed;
+use App\Listeners\SetUpIntentSucceded;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -17,6 +19,12 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        'stripe-webhooks::setup_intent.succeeded' => [
+            SetUpIntentSucceded::class,
+        ],
+        'stripe-webhooks::setup_intent.setup_failed' => [
+            SetUpIntentFailed::class,
         ],
     ];
 

@@ -34,6 +34,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/my-orders', [\App\Http\Controllers\OrderController::class, 'getMyOrders']);
 
+    Route::get('/get/stripekeys', [\App\Http\Controllers\StoreController::class, 'getStripeKeys']);
+    Route::get('/hasPaymentMethod', [\App\Http\Controllers\StoreController::class, 'hasPaymentMethod']);
 });
 Route::get('/common-questions', [\App\Http\Controllers\QuestionsController::class, 'getCommonQuestions']);
+Route::stripeWebhooks('stripe/webhook');
 require __DIR__.'/auth.php';
