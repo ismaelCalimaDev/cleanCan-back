@@ -16,4 +16,15 @@ class EditProduct extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+    protected function beforeFill()
+    {
+        $this->record->price = round($this->record->price / 100, 2);
+    }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['price'] = intval($data['price'] * 100);
+
+        return $data;
+    }
 }

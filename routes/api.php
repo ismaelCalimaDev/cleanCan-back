@@ -36,6 +36,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/get/stripekeys', [\App\Http\Controllers\StoreController::class, 'getStripeKeys']);
     Route::get('/hasPaymentMethod', [\App\Http\Controllers\StoreController::class, 'hasPaymentMethod']);
+    Route::get('/check-operation-succeeded', [\App\Http\Controllers\StoreController::class, 'checkIfOperationSucceeded']);
+    Route::post('/confirmPayment', [\App\Http\Controllers\StoreController::class, 'confirmPayment']);
+
 });
 Route::get('/common-questions', [\App\Http\Controllers\QuestionsController::class, 'getCommonQuestions']);
 Route::stripeWebhooks('stripe/webhook');

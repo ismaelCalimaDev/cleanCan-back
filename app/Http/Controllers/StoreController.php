@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FailedOrder;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Stripe\EphemeralKey;
 use Stripe\Stripe;
@@ -48,19 +50,33 @@ class StoreController extends Controller
 
     public function confirmPayment(Request $request)
     {
-        $validate = $request->validate([
-            'amount' => 'numeric|required|min:1',
-        ]);
         $stripe = new StripeClient((config('cleancan.stripe_key')));
+        $product = Product::where('id', $request->product_id)->first();
         $setup_intent = $stripe->setupIntents->retrieve(auth()->user()->setupintent_id);
         $payment_method_id = $setup_intent->payment_method;
         auth()->user()->charge(
-            $request->price * 100, $payment_method_id, [
+            $product->price, $payment_method_id, [
                 'metadata' => [
-                    'amount' => $validate['amount'], 'product_id' => $request->id, 'size' => $request->size,
-                    'text' => $request->text, 'color' => $request->color,
+                    'product_id' => $request->product_id, 'location_id' => $request->location_id,
+                    'user_id' => auth()->user()->id, 'date' => $request->date, 'car_id' => $request->car_id,
                 ],
             ]
         );
+    }
+
+    public function checkIfOperationSucceeded() {
+        if (FailedOrder::where('user_id', auth()->user()->id)->first()) {
+            FailedOrder::where('user_id', auth()->user()->id)->delete();
+
+            return response()->json([
+                'success' => true,
+                'charge_succeeded' => false,
+            ]);
+        } else {
+            return response()->json([
+                'success' => true,
+                'charge_succeeded' => true,
+            ]);
+        }
     }
 }

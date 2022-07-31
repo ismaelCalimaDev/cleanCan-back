@@ -41,10 +41,6 @@ class OrderResource extends Resource
                     ->relationship('product', 'title')
                     ->label('Producto')
                     ->disabled(),
-                Forms\Components\BelongsToSelect::make('product_id')
-                    ->relationship('product', 'price')
-                    ->label('Precio')
-                    ->disabled(),
                 Forms\Components\Card::make()
                 ->schema([
                     Forms\Components\BelongsToSelect::make('car_id')

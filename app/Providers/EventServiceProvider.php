@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Listeners\ChargeSucceeded;
 use App\Listeners\SetUpIntentFailed;
 use App\Listeners\SetUpIntentSucceded;
 use Illuminate\Auth\Events\Registered;
@@ -25,6 +26,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         'stripe-webhooks::setup_intent.setup_failed' => [
             SetUpIntentFailed::class,
+        ],
+        'stripe-webhooks::charge.succeeded' => [
+            ChargeSucceeded::class,
         ],
     ];
 
