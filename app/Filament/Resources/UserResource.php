@@ -43,7 +43,6 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('name')->label('Nombre')->searchable(),
                 Tables\Columns\TextColumn::make('email')->label('Correo')->searchable(),
                 Tables\Columns\TextColumn::make('phone_number')->label('Teléfono'),
-                Tables\Columns\TextColumn::make('wash_amount')->label('Número de lavados'),
             ])
             ->bulkActions([
                 ExportBulkAction::make()
