@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return ['Laravel' => app()->version()];
 });
+
+Route::get('/password-reset/{token}', function ($token) {
+    return view('reset-password')->with('token', $token);
+});
+Route::post('/password-reset-completed', [\App\Http\Controllers\Auth\NewPasswordController::class, 'store']);
+

@@ -50,6 +50,6 @@ class NewPasswordController extends Controller
             ]);
         }
 
-        return response()->json(['status' => __($status)]);
+        return view('reset-password-completed');
     }
 }
