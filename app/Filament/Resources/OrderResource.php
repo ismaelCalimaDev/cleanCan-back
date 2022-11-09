@@ -89,6 +89,8 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('product.title')
                     ->label('Pedido')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('date')
+                    ->label('Fecha y hora del pedido')
             ])
             ->filters([
                 Filter::make('date')
